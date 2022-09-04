@@ -1,0 +1,5 @@
+speechrecognition
+pyaudio
+gTTS
+playsound
+PyObjC
