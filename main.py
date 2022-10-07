@@ -6,12 +6,14 @@ import os
 import random
 from gtts import gTTS
 import playsound
+import wikipedia
 
 r = sr.Recognizer()
 r.energy_threshold = 2837
 r.dynamic_energy_threshold = True
 
-def record_audio(ask = False):
+
+def record_audio(ask=False):
     if ask:
         alina_speak(ask)
     with sr.Microphone() as source:
@@ -25,6 +27,7 @@ def record_audio(ask = False):
             alina_speak("Sorry my speech service is down")
         return voice_data
 
+
 def alina_speak(audio_string):
     tts = gTTS(text=audio_string, tld='com', lang="en", slow=False)
     r = random.randint(1, 1000000)
@@ -34,7 +37,15 @@ def alina_speak(audio_string):
     playsound.playsound(audio_file)
     os.remove(audio_file)
 
+
 def respond(voice_data):
+    if 'wikipedia' in voice_data:
+        alina_speak("searching wikipedia...")
+        query = query.replace("wikipedia", "")
+        results = wikipedia.summary(query, sentences=1)
+        print(results)
+        alina_speak(results)
+        
     if "what is your name" in voice_data:
         alina_speak("My name is Alina")
     if "what time is it" in voice_data:
@@ -56,8 +67,8 @@ def respond(voice_data):
         # importing installed library
         import pyjokes
         # using get_joke() to generate a single joke
-        #language is english
-        #category is neutral
+        # language is english
+        # category is neutral
         My_joke = pyjokes.get_joke(language="en", category="neutral")
         alina_speak(My_joke)
         
