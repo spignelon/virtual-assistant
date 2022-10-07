@@ -52,7 +52,15 @@ def respond(voice_data):
     if "exit" in voice_data:
         alina_speak("Goodbye!")
         exit()
-
+    if "tell a joke" in voice_data:
+        # importing installed library
+        import pyjokes
+        # using get_joke() to generate a single joke
+        #language is english
+        #category is neutral
+        My_joke = pyjokes.get_joke(language="en", category="neutral")
+        alina_speak(My_joke)
+        
 time.sleep(1)
 alina_speak("How can I help you?")
 while 1:
