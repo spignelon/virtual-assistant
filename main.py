@@ -8,6 +8,8 @@ import playsound
 import pyjokes
 import speech_recognition as sr
 import wikipedia
+import screen_brightness_control as sbc
+import alsaaudio
 
 
 # Initialize voice recognizer
@@ -72,6 +74,54 @@ def respond(voice_data):
     if "tell a joke" in voice_data:
         joke = pyjokes.get_joke(language="en", category="neutral")
         alina_speak(joke)
+
+    # Command to shut down the system
+    if "shutdown" in voice_data:
+        confirmation = record_audio(
+            "Do you really wish to shut down your system?")
+        confirmation = confirmation.lower()
+        if "yes" in confirmation or "yep" in confirmation:
+            alina_speak("Shutting down in 3 seconds")
+            time.sleep(3)
+            if os.name == "posix":
+                os.system("shutdown now")
+            if os.name == "nt":
+                os.system("shutdown /s /t 1")
+
+    # Command to change brightness
+    if "brightness" in voice_data:
+        current_brightness = sbc.get_brightness()[0]
+        if "increase" in voice_data:
+            alina_speak("Increasing Brightness")
+            new_brightness = min(100, current_brightness+10)
+            sbc.set_brightness(new_brightness)
+        if "decrease" in voice_data:
+            alina_speak("Decreasing Brightness")
+            new_brightness = max(0, current_brightness-10)
+            sbc.set_brightness(new_brightness)
+        if "%" in voice_data:
+            percentage = int(voice_data.split("%")[0].split(" ")[-1])
+            percentage = min(max(0, percentage), 100)
+            alina_speak(f"Setting brightness to {percentage}%")
+            sbc.set_brightness(percentage)
+
+    # Command to change volume
+    if "volume" in voice_data:
+        mixer = alsaaudio.Mixer()
+        current_volume = mixer.getvolume()[0]
+        if "increase" in voice_data:
+            alina_speak("Increasing Volume")
+            new_volume = min(100, current_volume+5)
+            mixer.setvolume(new_volume)
+        if "decrease" in voice_data:
+            alina_speak("Decreasing Volume")
+            new_volume = max(0, current_volume-5)
+            mixer.setvolume(new_volume)
+        if "%" in voice_data:
+            percentage = int(voice_data.split("%")[0].split(" ")[-1])
+            percentage = min(max(0, percentage), 100)
+            alina_speak(f"Setting volumem to {percentage}%")
+            mixer.setvolume(percentage)
 
 
 if __name__ == "__main__":
