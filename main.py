@@ -51,6 +51,11 @@ def respond(voice_data):
         query = voice_data.replace("wikipedia", "")
         results = wikipedia.summary(query, sentences=1)
         alina_speak(results)
+    if "youtube" in voice_data:
+        search = record_audio("What do you want to search for?")
+        url = f"https://www.youtube.com/results?search_query={search}"
+        webbrowser.get().open(url)
+        alina_speak(f"Here is what I found for {search}")
     if "what is your name" in voice_data:
         alina_speak("My name is Alina.")
     if "what time is it" in voice_data:
