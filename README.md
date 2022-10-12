@@ -2,7 +2,18 @@
 A simple virtual assistant written in python
 
 ---
-
+## Setup:
+### Cloning the repo:
+```
+git clone https://github.com/spignelon/virtual-assistant.git
+cd virtual-assistant
+```
+### Setting up the environment:
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 ## Usage:
 ```python main.py```
 
