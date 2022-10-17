@@ -129,6 +129,39 @@ def respond(voice_data):
             mixer.setvolume(percentage)
 
 
+def PaperScissors(voice_data):
+    computer = ["rock", "paper", "scissors"]
+    voice_data = voice_data.lower()
+    start = True
+    while start:
+        if "paper game" in voice_data:
+            play1 = random.choice(computer)
+            play2 = record_audio("what would you lke to play")
+            play2 = play2.lower()
+            if play1 =="paper" and play2 =="rock":
+                alina_speak("computer wins")
+            elif play1 =="rock" and play2 == "paper":
+                alina_speak("you win")
+            elif play1 =="rock" and play2 =="scissors":
+                alina_speak("compuer wins")
+            elif play1 == "scissors" and play2 == "rock":
+                alina_speak("you win")
+            elif play1 == "paper" and play2 == "scissors":
+                alina_speak("you win")
+            elif play1 == "scissors" and play2 == "paper":
+                alina_speak("computer wins")
+            else:
+                alina_speak("equal play")
+
+            proceed = record_audio("would you like to continue?")
+            proceed = proceed.lower()
+            if "yes" in proceed:
+                start = True
+            else:
+                alina_speak("Goodbye")
+                start = False
+
+
 if __name__ == "__main__":
     # Delay for one second
     time.sleep(1)
@@ -136,3 +169,4 @@ if __name__ == "__main__":
     while True:
         voice_data = record_audio()
         respond(voice_data)
+        PaperScissors(voice_data)
