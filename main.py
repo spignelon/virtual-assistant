@@ -56,8 +56,33 @@ def respond(voice_data):
         url = f"https://www.youtube.com/results?search_query={search}"
         webbrowser.get().open(url)
         alina_speak(f"Here is what I found for {search}")
+    if "instagram" in voice_data:
+        search = record_audio("What do you want to search for?")
+        url = f"https://www.instagram.com/results?search_query={search}"
+        webbrowser.get().open(url)
+        alina_speak(f"Here is what I found for {search}")
+    if "how are you" in voice_data:
+        alina_speak("I am good, thank you")
+    if "how was your day" in voice_data:
+        alina_speak("My day was awesome")
+    if "what is your favourite sport" in voice_data:
+        alina_speak("My favourite sport wil be football")
+    if "Are you a cat person or a dog person" in voice_data:
+        alina_speak("I a more of a cat person")
+    if "what is the most rewarding part of your career" in voice_data:
+        alina_speak("the fact that i get to have conversations with different people")
+    if "what super power do you wish  you could have" in voice_data:
+        alina_speak("I dont wish for any")
+    if "what is your favourite color" in voice_data:
+        alina_speak("My favourite color is blue")
+    if "what is your favourite programming languuage" in voice_data:
+        alina_speak("My favourite programming language is python")
     if "what is your name" in voice_data:
         alina_speak("My name is Alina.")
+    if "I enjoyed todays conversation did you?" in voice_data:
+        alina_speak("Yes i did, i would love to see you again")
+    if "what is the dscription of your work" in voice_data:
+        alina_speak("I am a computer robort that help people with their needs")
     if "what time is it" in voice_data:
         alina_speak(time.ctime())
     if "search" in voice_data:
@@ -129,39 +154,6 @@ def respond(voice_data):
             mixer.setvolume(percentage)
 
 
-def PaperScissors(voice_data):
-    computer = ["rock", "paper", "scissors"]
-    voice_data = voice_data.lower()
-    start = True
-    while start:
-        if "paper game" in voice_data:
-            play1 = random.choice(computer)
-            play2 = record_audio("what would you lke to play")
-            play2 = play2.lower()
-            if play1 =="paper" and play2 =="rock":
-                alina_speak("computer wins")
-            elif play1 =="rock" and play2 == "paper":
-                alina_speak("you win")
-            elif play1 =="rock" and play2 =="scissors":
-                alina_speak("compuer wins")
-            elif play1 == "scissors" and play2 == "rock":
-                alina_speak("you win")
-            elif play1 == "paper" and play2 == "scissors":
-                alina_speak("you win")
-            elif play1 == "scissors" and play2 == "paper":
-                alina_speak("computer wins")
-            else:
-                alina_speak("equal play")
-
-            proceed = record_audio("would you like to continue?")
-            proceed = proceed.lower()
-            if "yes" in proceed:
-                start = True
-            else:
-                alina_speak("Goodbye")
-                start = False
-
-
 if __name__ == "__main__":
     # Delay for one second
     time.sleep(1)
@@ -169,4 +161,3 @@ if __name__ == "__main__":
     while True:
         voice_data = record_audio()
         respond(voice_data)
-        PaperScissors(voice_data)
