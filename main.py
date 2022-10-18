@@ -138,11 +138,11 @@ def PaperScissors(voice_data):
             play1 = random.choice(computer)
             play2 = record_audio("what would you lke to play")
             play2 = play2.lower()
-            if play1 =="paper" and play2 =="rock":
+            if play1 == "paper" and play2 =="rock":
                 alina_speak("computer wins")
-            elif play1 =="rock" and play2 == "paper":
+            elif play1 == "rock" and play2 == "paper":
                 alina_speak("you win")
-            elif play1 =="rock" and play2 =="scissors":
+            elif play1 == "rock" and play2 =="scissors":
                 alina_speak("compuer wins")
             elif play1 == "scissors" and play2 == "rock":
                 alina_speak("you win")
