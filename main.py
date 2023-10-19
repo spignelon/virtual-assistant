@@ -74,7 +74,7 @@ def respond(voice_data):
         coin_flip_with_random = "Heads" if random.random() > 0.5 else "Tails"
         alina_speak(f"You got {coin_flip_with_random}!")
     if "exit" in voice_data:
-        alina_speak("Goodbye!")
+        alina_speak("Goodbye have a Nice Day!")
         exit()
     if "tell a joke" in voice_data:
         joke = pyjokes.get_joke(language="en", category="neutral")
@@ -132,7 +132,7 @@ def respond(voice_data):
 if __name__ == "__main__":
     # Delay for one second
     time.sleep(1)
-    alina_speak("How can I help you?")
+    alina_speak("Hey I Am Here .. How can I help you?")
     while True:
         voice_data = record_audio()
         respond(voice_data)
