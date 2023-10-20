@@ -16,6 +16,7 @@ import alsaaudio
 r = sr.Recognizer()
 r.energy_threshold = 2837
 r.dynamic_energy_threshold = True
+assistant_name = "Alina"
 
 
 def record_audio(ask=False):
@@ -57,7 +58,7 @@ def respond(voice_data):
         webbrowser.get().open(url)
         alina_speak(f"Here is what I found for {search}")
     if "what is your name" in voice_data:
-        alina_speak("My name is Tejax.")
+        alina_speak("My name is alina.")
     if "what time is it" in voice_data:
         alina_speak(time.ctime())
     if "search" in voice_data:
@@ -74,11 +75,16 @@ def respond(voice_data):
         coin_flip_with_random = "Heads" if random.random() > 0.5 else "Tails"
         alina_speak(f"You got {coin_flip_with_random}!")
     if "exit" in voice_data:
-        alina_speak("Goodbye have a Nice Day!")
+        alina_speak("Goodbye!")
         exit()
     if "tell a joke" in voice_data:
         joke = pyjokes.get_joke(language="en", category="neutral")
         alina_speak(joke)
+
+    #function to change name of assistant 
+    if "change your name to" in voice_data:
+            new_name = voice_data.replace("change your name to", "").strip()
+            change_assistant_name(new_name)
 
     # Command to shut down the system
     if "shutdown" in voice_data:
@@ -128,11 +134,18 @@ def respond(voice_data):
             alina_speak(f"Setting volumem to {percentage}%")
             mixer.setvolume(percentage)
 
+def change_assistant_name(new_name):
+    global assistant_name
+    assistant_name = new_name
+    alina_speak(f"My name is now {new_name}.")
+
+
 
 if __name__ == "__main__":
     # Delay for one second
     time.sleep(1)
-    alina_speak("Hey I Am Here .. How can I help you?")
+    alina_speak("How can I help you?")
     while True:
         voice_data = record_audio()
         respond(voice_data)
+       
