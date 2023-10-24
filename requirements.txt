@@ -15,5 +15,5 @@ screen-brightness-control==0.15.5
 six==1.16.0
 soupsieve==2.3.2.post1
 SpeechRecognition==3.8.1
-urllib3==1.26.12
+urllib3==1.26.18
 wikipedia==1.4.0
