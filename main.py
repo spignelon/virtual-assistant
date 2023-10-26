@@ -58,7 +58,7 @@ def respond(voice_data):
         webbrowser.get().open(url)
         alina_speak(f"Here is what I found for {search}")
     if "what is your name" in voice_data:
-        alina_speak("My name is alina.")
+        alina_speak("My name is Alina.")
     if "what time is it" in voice_data:
         alina_speak(time.ctime())
     if "search" in voice_data:
